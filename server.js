@@ -2,9 +2,11 @@ const express = require("express");
 const path = require("path");
 
 // set up the express app
+const routes = require("./routes");
+const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 8080;
-const apiRoutes = require("./routes/apiRoutes");
+
 
 
 // set up the express app to handle data parsing
@@ -16,12 +18,15 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //use apiRoutes
-app.use("/api", apiRoutes);
+app.use(routes);
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "./client/build/index.html"))
 });
 
+// Connect to Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost");
+
 app.listen(PORT, function () {
-    console.log('🌎==> API server now on port ${PORT}!');
+    console.log(`🌎  ==> API server now listening on PORT ${PORT}!`);
 });
