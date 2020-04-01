@@ -1,4 +1,6 @@
 import React from 'react';
+import { NavLink} from 'react-router-dom';
+import AuthContext from '../context/auth-context';
 // import ReactDOM from 'react-dom';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -41,7 +43,8 @@ const theme = createMuiTheme({
 });
 
 const Nav = (props) => {
-    const [state, dispatch] = useStoreContext();
+    // const [state, dispatch] = useStoreContext();
+    const {token, logout} = useContext(AuthContext);
 
     const handleIconClicked = () => {
         dispatch({
@@ -71,8 +74,16 @@ const Nav = (props) => {
                     Aged Care Worker Assist
                 </Typography>
                 <div style={{ marginLeft: "auto" }}>
-                    <Button color="inherit" href="./Login/Login">
-                        login
+                {!token && <li><NavLink to="/auth">Authentication</NavLink></li>}
+                {token && (
+                    <li><NavLink to="/logout" onClick={logout}>Logout</NavLink></li>
+                )}
+                    <Button color="inherit">
+                    {!token && <NavLink to="/auth">Authentication</NavLink>}
+                    </Button>
+                    <br></br>
+                    <Button color="inherit">
+                    {token && ( <NavLink to="/logout" onClick={logout}>Logout</NavLink>)}
                     </Button>
                 </div>
             </Toolbar>
@@ -80,6 +91,32 @@ const Nav = (props) => {
     );
 }
 
-
-
 export default Nav;
+
+// import React, {useContext} from 'react';
+// import { NavLink } from 'react-router-dom';
+// import AuthContext from '../context/auth-context';
+// import './MainNavigation.css'
+
+// export default (props) => {
+
+//     const {token, logout} = useContext(AuthContext);
+    
+//     return (
+//         <header className="main-nav">
+//         <div className="main-nav-logo">
+//             <h1>The Navbar</h1>
+//         </div>
+//         <nav className="main-nav-items">
+//             <ul>
+//                 {!token && <li><NavLink to="/auth">Authentication</NavLink></li>}
+//                 {token && (
+//                     <li><NavLink to="/logout" onClick={logout}>Logout</NavLink></li>
+//                 )}
+//             </ul>
+//         </nav>
+//         </header>
+//     )
+    
+
+// }
