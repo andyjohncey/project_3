@@ -161,7 +161,19 @@ function Assist() {
     };
 
     return (
-        <div className={classes.root}>
+
+        <Container maxWidth="xs">
+            <div className={classes.root}>
+            <Grid item xs={12}>
+                {/* <Nav />
+                <SideBar /> */}
+                {/* <h1>Channel Post </h1> */}
+                {/* <Post /> */}
+            </Grid>
+            <Grid item xs={12}>
+                <ChannelsList />
+            </Grid>
+                
             <CssBaseline />
             <Nav handleOpen={handleDrawerOpen} handleClose={handleDrawerClose} />
             {/* <Drawer open = {open} handle = {handleDrawerClose}*/}
@@ -234,6 +246,7 @@ function Assist() {
                 </main>
             </div>
         </div>
+        </Container>
     );
 }
 
