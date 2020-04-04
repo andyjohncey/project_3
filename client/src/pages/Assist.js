@@ -105,7 +105,7 @@ function Assist() {
 
 
     // Setting our component's initial state
-    const [posts, setPosts] = useState([{}])
+    const [posts, setPosts] = useState([])
     const [formObject, setFormObject] = useState({})
 
 
