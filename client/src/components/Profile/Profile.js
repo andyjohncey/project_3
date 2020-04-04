@@ -29,9 +29,27 @@ export default function ProfileCard() {
     const classes = useStyles();
     const [state, setState] = React.useState(false);
 
-    const handlClick = () => {
+    const [formObject, setFormObject] = useState({
+        name:"",
+        userName:"",
+        email:"",
+        workRole: "",
+        qualification: ""
+    })
+
+    const submitHandler = () => {
         setState(!state);
+        
     };
+
+    const handleInputChange = (e) => {
+        let name = e.target.name;
+        let value = e.target.value;
+  
+        console.log(name, value)
+  
+        setFormObject({...formObject, [name]:value})
+    } 
 
     return (
         <Card className={classes.root}>
@@ -52,40 +70,63 @@ export default function ProfileCard() {
                 <Typography variant="body2" color="textprimary">
                     <TextField
                         label="Name"
-                        id="outlined-margin-normal"
-                        defaultValue="Default Value"
+                        id="name"
+                        value={formObject.name}
                         className={classes.textField}
                         helperText="Full Name"
                         margin="normal"
                         variant="outlined"
+                        onChange={handleInputChange}
                     />
                 </Typography>
                 <Typography variant="body2" color="textprimary">
                     <TextField
                         label="User Name"
-                        id="outlined-margin-normal"
-                        defaultValue="Default Value"
+                        id="userName"
+                        value={formObject.username}
                         className={classes.textField}
                         helperText="User Name"
                         margin="normal"
                         variant="outlined"
+                        onChange={handleInputChange}
                     />
                 </Typography>
                 <Typography variant="body2" color="textprimary">
                     <TextField
                         label="Email"
-                        id="outlined-margin-normal"
-                        defaultValue="Default Value"
+                        id="email"
+                        value={formObject.email}
                         className={classes.textField}
                         helperText="Email address"
                         margin="normal"
                         variant="outlined"
+                        onChange={handleInputChange}
                     />
                 </Typography>
+                <TextField
+                        label="workRole"
+                        id="workRole"
+                        value={setFormObject.workRole}
+                        className={classes.textField}
+                        helperText="Work Role"
+                        margin="normal"
+                        variant="outlined"
+                        onChange={handleInputChange}
+                    />
+                    <TextField
+                        label="Qualification"
+                        id="qualification"
+                        value={setFormObject.qualification}
+                        className={classes.textField}
+                        helperText="Qualification"
+                        margin="normal"
+                        variant="outlined"
+                        onChange={handleInputChange}
+                    />
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="update profile">
-                    <SaveRoundedIcon />
+                    <SaveRoundedIcon onclick={submitHandler}/>
                 </IconButton>
             </CardActions>
         </Card>
