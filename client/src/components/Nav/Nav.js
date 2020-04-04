@@ -1,9 +1,9 @@
-import React from 'react';
-import { NavLink} from 'react-router-dom';
-import AuthContext from '../context/auth-context';
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import AuthContext from '../../context/auth-context';
 // import ReactDOM from 'react-dom';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 // import Drawer from '@material-ui/core/Drawer';
 // import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -35,32 +35,32 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const theme = createMuiTheme({
-    palette: {
-        primary: indigo,
-        secondary: lightBlue,
-    },
-});
+// const theme = createMuiTheme({
+//     palette: {
+//         primary: indigo,
+//         secondary: lightBlue,
+//     },
+// });
 
 const Nav = (props) => {
-    // const [state, dispatch] = useStoreContext();
+    const [_, dispatch] = useStoreContext();
     const {token, logout} = useContext(AuthContext);
 
-    const handleIconClicked = () => {
+    function handleIconClicked(e) {
+        e.preventDefault();
         dispatch({
             type: SET_SIDEBAR_OPEN,
             isSidebarOpen: true,
         });
     }
 
-
     const classes = useStyles();
-    const theme = useTheme();
+    // const theme = useTheme();
     return (
         <AppBar
             position="fixed"
             className={clsx(classes.appBar)}>
-            <Toolbar>
+                <Toolbar>
                 <IconButton
                     color="inherit"
                     aria-label="menu"
@@ -76,19 +76,19 @@ const Nav = (props) => {
                 <div style={{ marginLeft: "auto" }}>
                 {!token && <li><NavLink to="/auth">Authentication</NavLink></li>}
                 {token && (
-                    <li><NavLink to="/logout" onClick={logout}>Logout</NavLink></li>
+                   <li><NavLink to="/logout" onClick={logout}>Logout</NavLink></li>
                 )}
                     <Button color="inherit">
                     {!token && <NavLink to="/auth">Authentication</NavLink>}
                     </Button>
                     <br></br>
                     <Button color="inherit">
-                    {token && ( <NavLink to="/logout" onClick={logout}>Logout</NavLink>)}
+                    {token && (<NavLink to="/logout" onClick={logout}>Logout</NavLink>)}
                     </Button>
                 </div>
             </Toolbar>
         </AppBar>
-    );
+        );
 }
 
 export default Nav;
