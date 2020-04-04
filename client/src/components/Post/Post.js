@@ -36,11 +36,11 @@ const ColorButton = withStyles(theme => ({
     },
 }))(Button);
 
-export default function Post() {
+const Post = () => {
     const titleRef = useRef();
     const bodyRef = useRef();
     const usernameRef = useRef()
-    const [state, dispatch] = useStoreContext();
+    const [_, dispatch] = useStoreContext();
 
 
     const handleSubmit = e => {
@@ -119,7 +119,7 @@ export default function Post() {
     return (
         <div className={classes.root}>
             <Typography variant="h5">
-                Create a post
+                Create a channel post
             </Typography>
             <div onSubmit={handleSubmit}>
                 <TextField
@@ -176,5 +176,7 @@ export default function Post() {
         </div >
     );
 };
+
+export default Post;
 
 
