@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
+import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -18,7 +18,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import AddCommentIcon from '@material-ui/icons/AddComment';
 import EventIcon from '@material-ui/icons/Event';
-
+import Container from '@material-ui/core/Container';
 import Nav from '../components/Nav/Nav';
 import Post from '../components/Post/Post';
 import { useStoreContext } from '../utils/GlobalState';
@@ -92,7 +92,7 @@ const useStyles = makeStyles(theme => ({
 function Assist() {
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     // set the sidebar/ drawer open/ close feature
     const handleDrawerOpen = () => {
@@ -105,7 +105,7 @@ function Assist() {
 
 
     // Setting our component's initial state
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState([{}])
     const [formObject, setFormObject] = useState({})
 
 
@@ -161,7 +161,6 @@ function Assist() {
     };
 
     return (
-
         <Container maxWidth="xs">
             <div className={classes.root}>
             <Grid item xs={12}>
@@ -217,7 +216,7 @@ function Assist() {
                     })}
                 >
                     <div className={classes.drawerHeader} />
-                    <Post />
+                    <Post/>
                     <Channels />
                     <ChannelsList />
                     {/* <Typography paragraph>
