@@ -110,7 +110,7 @@ function Detail(props) {
                 </Grid>
                 <Grid item xs={9}>
                     <Paper className={classes.paper}>
-                        <Typography variant="h4">
+                        <Typography variant="body1">
                             Content:
                                 </Typography>
                         <Typography variant="paragraph">
